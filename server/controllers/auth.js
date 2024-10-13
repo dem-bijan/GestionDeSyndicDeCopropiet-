@@ -15,7 +15,7 @@ export const register = async (req, res) => {
       location,
       occupation,
     } = req.body;
-
+/*Le sel est utilisé pour rendre le hachage plus sûr en ajoutant une valeur aléatoire au mot de passe avant de le hacher.*/
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
