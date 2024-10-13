@@ -4,6 +4,7 @@ import User from "../models/User.js";
 /* CREATE */
 export const createPost = async (req, res) => {
   try {
+    /*****Récupération des données du corps de la requête :****/
     const { userId, description, picturePath } = req.body;
     const user = await User.findById(userId);
     const newPost = new Post({
@@ -18,7 +19,7 @@ export const createPost = async (req, res) => {
       comments: [],
     });
     await newPost.save();
-
+/******************Récupération de tous les posts :****************/
     const post = await Post.find();
     res.status(201).json(post);
   } catch (err) {
@@ -52,6 +53,8 @@ export const likePost = async (req, res) => {
     const { id } = req.params;
     const { userId } = req.body;
     const post = await Post.findById(id);
+/*post.likes est un objet de type Map, où les clés sont
+*les userId et les valeurs sont des booléens indiquant si l'utilisateur a liké ou non.*/
     const isLiked = post.likes.get(userId);
 
     if (isLiked) {
