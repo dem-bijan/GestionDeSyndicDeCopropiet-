@@ -4,7 +4,7 @@ const initialState = {
   mode: "light",
   user: null,
   token: null,
-  posts: [],
+  isAdmin: false
 };
 
 export const authSlice = createSlice({
@@ -17,10 +17,12 @@ export const authSlice = createSlice({
     setLogin: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
+      state.isAdmin = action.payload.isAdmin;
     },
     setLogout: (state) => {
       state.user = null;
       state.token = null;
+      state.isAdmin = false;
     },
     setFriends: (state, action) => {
       if (state.user) {
